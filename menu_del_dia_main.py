@@ -8,25 +8,31 @@ dias_de_la_semana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sáb
 carta = ["Primer Plato", "Segundo Plato", "Postre"]
 menu_semanal = None
 menu = False
+correcto = True
 
-seleccion = raw_input("¿Quiere introducir el menu del día de toda la semana? (S/N): ")[0]
-seleccion = seleccion.upper()
-if seleccion == "S":
-    menu_semanal = True
-else:
-    menu_semanal = False
-    print "Menú del día:"
-    plato = raw_input(".-Introduzca el plato del día: ")
-    precio_correcto = True
-    while precio_correcto:
-        try:
-            precio = float(raw_input(".-Introduzca precio: "))
-            precio_correcto = False
-        except ValueError:
-            print "El precio no es correcto. Introduzca un precio válido."
+while correcto:
+	seleccion = raw_input("¿Quiere introducir el menu del día de toda la semana? (S/N): ")[0]
+	seleccion = seleccion.upper()
+	if seleccion == "S":
+		menu_semanal = True
+		correcto = False
+	elif seleccion == "N":
+		menu_semanal = False
+		print "Menú del día:"
+		plato = raw_input(".-Introduzca el plato del día: ")
+		precio_correcto = True
+		while precio_correcto:
+			try:
+				precio = float(raw_input(".-Introduzca precio: "))
+				precio_correcto = False
+			except ValueError:
+				print "El precio no es correcto. Introduzca un precio válido."
 
-    menu_del_dia[plato] = precio
-
+		correcto = False
+		menu_del_dia[plato] = precio
+	else:
+		print "La opción introducida no es correcta."
+	
 cont = 0
 while menu_semanal:
     print "\nMenú del día {}".format(dias_de_la_semana[cont])
